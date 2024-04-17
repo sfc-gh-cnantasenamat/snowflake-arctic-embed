@@ -12,11 +12,11 @@ selected_model = st.selectbox('Select an embed model', model_list)
 # Load embed model
 @st.cache_resource
 def load_tokenizer(input_tokenizer):
-    return AutoTokenizer.from_pretrained(f'Snowflake/{input_tokenizer}', trust_remote_code=True)
+    return AutoTokenizer.from_pretrained(f'Snowflake/{input_tokenizer}')
 
 @st.cache_resource
 def load_model(input_model):
-    return AutoModel.from_pretrained(f'Snowflake/{input_model}', add_pooling_layer=False, trust_remote_code=True)
+    return AutoModel.from_pretrained(f'Snowflake/{input_model}', add_pooling_layer=False, trust_remote_code=True, safe_serialization=True)
 
 tokenizer = load_tokenizer(selected_model)
 model = load_model(selected_model)
