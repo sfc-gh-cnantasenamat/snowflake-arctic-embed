@@ -16,10 +16,18 @@ def load_tokenizer(input_tokenizer):
 
 @st.cache_resource
 def load_model(input_model):
+    return AutoModel.from_pretrained(f'Snowflake/{input_model}', add_pooling_layer=False)
+
+@st.cache_resource
+def load_m_long_model(input_model):
     return AutoModel.from_pretrained(f'Snowflake/{input_model}', add_pooling_layer=False, trust_remote_code=True, safe_serialization=True)
 
+if selected_model == 'snowflake-arctic-embed-m-long':
+    model = load_m_long_model(selected_model)
+else:
+    model = load_model(selected_model)
+    
 tokenizer = load_tokenizer(selected_model)
-model = load_model(selected_model)
 model.eval()
 
 # Query
