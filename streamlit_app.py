@@ -4,8 +4,6 @@ from transformers import AutoModel, AutoTokenizer
 
 st.title('❄️ snowflake-arctic-embed')
 
-# model_list = ['snowflake-arctic-embed-xs']
-
 tokenizer = AutoTokenizer.from_pretrained('Snowflake/snowflake-arctic-embed-xs')
 model = AutoModel.from_pretrained('Snowflake/snowflake-arctic-embed-xs', add_pooling_layer=False)
 model.eval()
