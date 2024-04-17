@@ -6,7 +6,6 @@ st.title('❄️ snowflake-arctic-embed')
 
 model_list = ['snowflake-arctic-embed-xs', 'snowflake-arctic-embed-s', 'snowflake-arctic-embed-m', 'snowflake-arctic-embed-m-long', 'snowflake-arctic-embed-l']
 selected_model = st.selectbox('Select an embed model', model_list)
-st.info(selected_model, icon='❄️')
 
 tokenizer = AutoTokenizer.from_pretrained(f'Snowflake/{selected_model}')
 model = AutoModel.from_pretrained('Snowflake/snowflake-arctic-embed-xs', add_pooling_layer=False)
@@ -25,7 +24,6 @@ with torch.no_grad():
     query_embeddings = model(**query_tokens)[0][:, 0]
     doument_embeddings = model(**document_tokens)[0][:, 0]
 
-
 # normalize embeddings
 query_embeddings = torch.nn.functional.normalize(query_embeddings, p=2, dim=1)
 doument_embeddings = torch.nn.functional.normalize(doument_embeddings, p=2, dim=1)
@@ -34,7 +32,9 @@ scores = torch.mm(query_embeddings, doument_embeddings.transpose(0, 1))
 for query, query_scores in zip(queries, scores):
     doc_score_pairs = list(zip(documents, query_scores))
     doc_score_pairs = sorted(doc_score_pairs, key=lambda x: x[1], reverse=True)
+    
     #Output passages & scores
+    st.subheader('Output')
     st.write("Query:", query)
     for document, score in doc_score_pairs:
         st.write(score, document)
