@@ -10,9 +10,11 @@ model_list = ['snowflake-arctic-embed-xs', 'snowflake-arctic-embed-s', 'snowflak
 selected_model = st.selectbox('Select an embed model', model_list)
 
 # Load embed model
-tokenizer = AutoTokenizer.from_pretrained(f'Snowflake/{selected_model}')
-model = AutoModel.from_pretrained(f'Snowflake/{selected_model}', add_pooling_layer=False)
-model.eval()
+@st.cache_data
+def load_model():
+    tokenizer = AutoTokenizer.from_pretrained(f'Snowflake/{selected_model}')
+    model = AutoModel.from_pretrained(f'Snowflake/{selected_model}', add_pooling_layer=False)
+    model.eval()
 
 # Query
 query_prefix = 'Represent this sentence for searching relevant passages: '
