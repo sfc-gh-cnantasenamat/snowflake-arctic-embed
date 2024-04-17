@@ -4,12 +4,14 @@ from transformers import AutoModel, AutoTokenizer
 
 st.title('❄️ snowflake-arctic-embed')
 
+# model_list = ['snowflake-arctic-embed-xs']
+
 tokenizer = AutoTokenizer.from_pretrained('Snowflake/snowflake-arctic-embed-xs')
 model = AutoModel.from_pretrained('Snowflake/snowflake-arctic-embed-xs', add_pooling_layer=False)
 model.eval()
 
 query_prefix = 'Represent this sentence for searching relevant passages: '
-queries  = ['what is snowflake?', 'Where can I get the best tacos?']
+queries  = ['What is snowflake?', 'Where can I get the best tacos?']
 queries_with_prefix = ["{}{}".format(query_prefix, i) for i in queries]
 query_tokens = tokenizer(queries_with_prefix, padding=True, truncation=True, return_tensors='pt', max_length=512)
 
