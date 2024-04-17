@@ -11,7 +11,7 @@ selected_model = st.selectbox('Select an embed model', model_list)
 
 # Load embed model
 tokenizer = AutoTokenizer.from_pretrained(f'Snowflake/{selected_model}')
-model = AutoModel.from_pretrained('Snowflake/snowflake-arctic-embed-xs', add_pooling_layer=False)
+model = AutoModel.from_pretrained(f'Snowflake/{selected_model}', add_pooling_layer=False)
 model.eval()
 
 # Query
