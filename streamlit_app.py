@@ -6,6 +6,7 @@ st.title('❄️ snowflake-arctic-embed')
 
 model_list = ['snowflake-arctic-embed-xs', 'snowflake-arctic-embed-s', 'snowflake-arctic-embed-m', 'snowflake-arctic-embed-m-long', 'snowflake-arctic-embed-l']
 selected_model = st.selectbox('Select an embed model', model_list)
+st.info(selected_model, icon='❄️')
 
 tokenizer = AutoTokenizer.from_pretrained(f'Snowflake/{selected_model}')
 model = AutoModel.from_pretrained('Snowflake/snowflake-arctic-embed-xs', add_pooling_layer=False)
