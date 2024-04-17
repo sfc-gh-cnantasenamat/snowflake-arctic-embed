@@ -13,6 +13,8 @@ selected_model = st.selectbox('Select an embed model', model_list)
 @st.cache_resource
 def load_tokenizer():
     return AutoTokenizer.from_pretrained(f'Snowflake/{selected_model}')
+
+@st.cache_resource
 def load_model():
     return AutoModel.from_pretrained(f'Snowflake/{selected_model}', add_pooling_layer=False)
 
