@@ -16,7 +16,7 @@ model.eval()
 
 # Query
 query_prefix = 'Represent this sentence for searching relevant passages: '
-queries  = ['What is snowflake?', 'Where can I get the best tacos?']
+queries  = ['What is Snowflake?', 'Where can I get the best tacos?']
 queries_with_prefix = ["{}{}".format(query_prefix, i) for i in queries]
 query_tokens = tokenizer(queries_with_prefix, padding=True, truncation=True, return_tensors='pt', max_length=512)
 
