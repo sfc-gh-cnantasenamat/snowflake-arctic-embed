@@ -59,4 +59,4 @@ for query, query_scores in zip(queries, scores):
     
     st.write("Query:", query)
     for document, score in doc_score_pairs:
-        st.write(score.detach().numpy(), document)
+        st.write(score.numpy(), document)
